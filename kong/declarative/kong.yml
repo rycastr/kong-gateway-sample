@@ -1,0 +1,36 @@
+_format_version: "1.1"
+
+services:
+  - name: api-cms
+    url: http://cms:1337
+    routes:
+      - name: users
+        methods:
+          - "GET"
+        paths:
+          - "/api/users$"
+        strip_path: false
+
+  - name: admin-cms
+    url: http://cms:1337
+    routes:
+      - name: cms-admin
+        paths:
+          - "/"
+        strip_path: true
+
+  - name: api-foo-bar
+    url: http://api:3000/foo
+    routes:
+      - name: foo-bar
+        methods:
+          - "GET"
+        paths:
+          - "/bar$"
+        strip_path: false
+plugins:
+- name: request-transformer
+  config: 
+    remove:
+      headers:
+      - authorization
